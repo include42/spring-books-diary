@@ -1,6 +1,7 @@
-package com.booksdiary.booksdiary.domain;
+package com.booksdiary.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 // TODO: 2021/01/25 추후 createdDate 작업할때 AuditingEntityLiester
