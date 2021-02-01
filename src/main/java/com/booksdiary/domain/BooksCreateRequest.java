@@ -12,4 +12,10 @@ import javax.validation.constraints.NotBlank;
 public class BooksCreateRequest {
     @NotBlank
     String name;
+
+    public Books toBooks() {
+        return Books.builder()
+                .name(this.name)
+                .build();
+    }
 }

@@ -1,9 +1,6 @@
 package com.booksdiary.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +10,7 @@ import javax.persistence.Id;
 @Getter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 // TODO: 2021/01/25 추후 createdDate 작업할때 AuditingEntityLiester
 @Entity
 // TODO: 2021/01/25 아직 비즈니스 로직이 없다!! 추후 테스트코드 작성
