@@ -15,7 +15,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class) // TODO: 2021/02/01 얘는 뭔데? 설명 추가
+@ExtendWith(MockitoExtension.class)
 public class BookServiceTest {
     private static final Long 도서_ID_1 = 1L;
     private static final String 도서_이름_1 = "도서_이름_1";

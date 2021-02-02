@@ -13,7 +13,7 @@ public class BookCreateRequest {
     @NotBlank
     String name;
 
-    public Book toBooks() {
+    public Book toBook() {
         return Book.builder()
                 .name(this.name)
                 .build();

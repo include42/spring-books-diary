@@ -15,7 +15,7 @@ public class BookService {
 
     @Transactional
     public BookResponse create(final BookCreateRequest request) {
-        final Book book = request.toBooks();
+        final Book book = request.toBook();
         final Book savedBook = bookRepository.save(book);
 
         return new BookResponse(savedBook);
