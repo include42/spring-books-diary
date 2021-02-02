@@ -9,12 +9,12 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BooksCreateRequest {
+public class BookCreateRequest {
     @NotBlank
     String name;
 
-    public Books toBooks() {
-        return Books.builder()
+    public Book toBooks() {
+        return Book.builder()
                 .name(this.name)
                 .build();
     }

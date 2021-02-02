@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BooksResponse {
+public class BookResponse {
     private Long id;
     private String name;
 
-    public BooksResponse(Books books) {
-        this.id = books.getId();
-        this.name = books.getName();
+    public BookResponse(Book book) {
+        this.id = book.getId();
+        this.name = book.getName();
     }
 }

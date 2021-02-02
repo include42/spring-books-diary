@@ -1,8 +1,8 @@
 package com.booksdiary.controller;
 
-import com.booksdiary.domain.BooksCreateRequest;
-import com.booksdiary.domain.BooksResponse;
-import com.booksdiary.service.BooksService;
+import com.booksdiary.domain.BookCreateRequest;
+import com.booksdiary.domain.BookResponse;
+import com.booksdiary.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,12 +14,12 @@ import java.net.URI;
 
 @RequiredArgsConstructor
 @RestController
-public class BooksController {
-    private final BooksService booksService;
+public class BookController {
+    private final BookService bookService;
 
     @PostMapping("/api/books")
-    public ResponseEntity<BooksResponse> create(@RequestBody @Valid final BooksCreateRequest request) {
-        final BooksResponse response = booksService.create(request);
+    public ResponseEntity<BookResponse> create(@RequestBody @Valid final BookCreateRequest request) {
+        final BookResponse response = bookService.create(request);
         final URI uri = URI.create("/api/books/" + response.getId());
 
         return ResponseEntity.created(uri)

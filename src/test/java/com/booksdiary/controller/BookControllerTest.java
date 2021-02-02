@@ -1,8 +1,8 @@
 package com.booksdiary.controller;
 
-import com.booksdiary.domain.BooksCreateRequest;
-import com.booksdiary.domain.BooksResponse;
-import com.booksdiary.service.BooksService;
+import com.booksdiary.domain.BookCreateRequest;
+import com.booksdiary.domain.BookResponse;
+import com.booksdiary.service.BookService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,14 +21,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-public class BooksControllerTest {
+public class BookControllerTest {
     private static final String API = "/api";
     private static final Long 도서_ID_1 = 1L;
     private static final String 도서_이름_1 = "도서_이름_1";
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @MockBean
-    private BooksService booksService;
+    private BookService bookService;
 
     private MockMvc mockMvc;
 
@@ -42,9 +42,9 @@ public class BooksControllerTest {
     @DisplayName("'/books'로 POST 요청 시, 도서를 생성한다.")
     @Test
     void createTest() throws Exception {
-        BooksCreateRequest request = new BooksCreateRequest(도서_이름_1);
-        BooksResponse response = new BooksResponse(도서_ID_1, 도서_이름_1);
-        when(booksService.create(any(BooksCreateRequest.class))).thenReturn(response);
+        BookCreateRequest request = new BookCreateRequest(도서_이름_1);
+        BookResponse response = new BookResponse(도서_ID_1, 도서_이름_1);
+        when(bookService.create(any(BookCreateRequest.class))).thenReturn(response);
         String requestAsString = OBJECT_MAPPER.writeValueAsString(request);
 
         this.mockMvc.perform(post(API + "/books")
