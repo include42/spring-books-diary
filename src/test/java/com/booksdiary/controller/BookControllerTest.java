@@ -14,17 +14,25 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
 public class BookControllerTest {
     private static final String API = "/api";
     private static final Long 도서_ID_1 = 1L;
+    private static final Long 도서_ID_2 = 2L;
     private static final String 도서_이름_1 = "도서_이름_1";
+    private static final String 도서_이름_2 = "도서_이름_2";
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @MockBean
@@ -53,5 +61,23 @@ public class BookControllerTest {
                 .andExpect(status().isCreated())
                 .andDo(print());
     }
+
     // TODO: 2021/01/27 validation 작동 예시에 대해 테스트코드 작성
+    @DisplayName("'/books'로 GET 요청 시, 도서의 목록을 반환한다.")
+    @Test
+    void listTest() throws Exception {
+        List<BookResponse> bookResponses = Arrays.asList(
+                new BookResponse(도서_ID_1, 도서_이름_1),
+                new BookResponse(도서_ID_2, 도서_이름_2)
+        );
+        when(bookService.list()).thenReturn(bookResponses);
+
+        this.mockMvc.perform(get(API + "/books")
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].id").value(도서_ID_1))
+                .andExpect(jsonPath("$[1].id").value(도서_ID_2))
+                .andExpect(jsonPath("$[0].name").value(도서_이름_1))
+                .andExpect(jsonPath("$[1].name").value(도서_이름_2));
+    }
 }
