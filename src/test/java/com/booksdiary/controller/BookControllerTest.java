@@ -19,9 +19,10 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -79,5 +80,14 @@ public class BookControllerTest {
                 .andExpect(jsonPath("$[1].id").value(도서_ID_2))
                 .andExpect(jsonPath("$[0].name").value(도서_이름_1))
                 .andExpect(jsonPath("$[1].name").value(도서_이름_2));
+    }
+
+    @DisplayName("'/books'로 DELETE 요청 시, 해당 도서를 삭제한다.")
+    @Test
+    void deleteTest() throws Exception {
+        doNothing().when(bookService).delete(eq(도서_ID_1));
+
+        this.mockMvc.perform(delete(API + "/books/" + 도서_ID_1)).
+                andExpect(status().isNoContent());
     }
 }

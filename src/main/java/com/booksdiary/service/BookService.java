@@ -4,6 +4,7 @@ import com.booksdiary.domain.Book;
 import com.booksdiary.domain.BookCreateRequest;
 import com.booksdiary.domain.BookRepository;
 import com.booksdiary.domain.BookResponse;
+import com.booksdiary.exception.BookNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,5 +31,11 @@ public class BookService {
                 .stream()
                 .map(BookResponse::new)
                 .collect(Collectors.toList());
+    }
+
+    public void delete(Long bookId) {
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new BookNotFoundException(bookId));
+        bookRepository.delete(book); // TODO: 2021/02/05 illegal-null
     }
 }

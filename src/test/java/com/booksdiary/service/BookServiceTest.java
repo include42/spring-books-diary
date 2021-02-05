@@ -13,10 +13,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class BookServiceTest {
@@ -62,5 +63,15 @@ public class BookServiceTest {
                 .hasSize(2)
                 .extracting("name")
                 .containsOnly(도서_이름_1, 도서_이름_2);
+    }
+
+    @DisplayName("특정 ID의 도서 삭제 요청 시 해당 도서를 삭제한다")
+    @Test
+    void deleteArticleTest() {
+        Book book = new Book(도서_ID_1, 도서_이름_1);
+        when(bookRepository.findById(any())).thenReturn(Optional.of(book));
+        bookService.delete(도서_ID_1);
+
+        verify(bookRepository, times(1)).delete(any(Book.class));
     }
 }

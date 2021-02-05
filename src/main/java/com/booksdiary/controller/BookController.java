@@ -5,10 +5,7 @@ import com.booksdiary.domain.BookResponse;
 import com.booksdiary.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -32,5 +29,12 @@ public class BookController {
     public ResponseEntity<List<BookResponse>> list() {
         return ResponseEntity.ok()
                 .body(bookService.list());
+    }
+
+    @DeleteMapping("/api/books/{bookId}")
+    public ResponseEntity<Void> delete(@PathVariable Long bookId) {
+        bookService.delete(bookId);
+        return ResponseEntity.noContent()
+                .build();
     }
 }
