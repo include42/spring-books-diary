@@ -69,7 +69,8 @@ public class BookServiceTest {
     @Test
     void deleteArticleTest() {
         Book book = new Book(도서_ID_1, 도서_이름_1);
-        when(bookRepository.findById(any())).thenReturn(Optional.of(book));
+        when(bookRepository.findById(eq(도서_ID_1))).thenReturn(Optional.of(book));
+        doNothing().when(bookRepository).delete(any(Book.class));
         bookService.delete(도서_ID_1);
 
         verify(bookRepository, times(1)).delete(any(Book.class));
