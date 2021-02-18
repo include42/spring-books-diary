@@ -1,7 +1,7 @@
 package com.booksdiary.service;
 
-import com.booksdiary.controller.dto.BookResponseDto;
 import com.booksdiary.domain.BookRepository;
+import com.booksdiary.service.dto.BookResponseServiceDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,10 +15,10 @@ public class BookService {
     private final BookRepository bookRepository;
 
     @Transactional(readOnly = true)
-    public List<BookResponseDto> list() {
+    public List<BookResponseServiceDto> list() {
         return bookRepository.findAll()
                 .stream()
-                .map(BookResponseDto::new)
+                .map(BookResponseServiceDto::new)
                 .collect(Collectors.toList());
     }
 }

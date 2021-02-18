@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
@@ -16,7 +17,12 @@ public class BookController {
 
     @GetMapping("/api/books")
     public ResponseEntity<List<BookResponseDto>> list() {
+        final List<BookResponseDto> responses = bookService.list()
+                .stream()
+                .map(BookResponseDto::new)
+                .collect(Collectors.toList());
+
         return ResponseEntity.ok()
-                .body(bookService.list());
+                .body(responses);
     }
 }

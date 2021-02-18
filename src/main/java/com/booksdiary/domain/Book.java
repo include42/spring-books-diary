@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Book {
+    // TODO: 2021/02/17 Validation을 도메인에도 하는게 맞나? 컬럼으로 하는게 낫나?
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
