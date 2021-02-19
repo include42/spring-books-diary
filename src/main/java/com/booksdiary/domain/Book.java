@@ -1,6 +1,8 @@
 package com.booksdiary.domain;
 
 import lombok.*;
+import org.hibernate.validator.constraints.ISBN;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -17,7 +19,6 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Book {
-    // TODO: 2021/02/17 Validation을 도메인에도 하는게 맞나? 컬럼으로 하는게 낫나?
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,7 +26,8 @@ public class Book {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @NotBlank
+    @NotNull
+    @ISBN
     private String isbn;
 
     @NotBlank
@@ -36,22 +38,26 @@ public class Book {
 
     @NotNull
     private LocalDateTime publishDate;
+    // TODO: 2021/02/19 실제 API의 양식 확인, 별도의 검증 필요한지 확인(현재날짜보다 뒤여야하나?)
 
     @NotBlank
     private String publisher;
 
-    @NotNull
+    @NotBlank
     private String author;
     // TODO: 2021/02/17 저자가 여러 명일때, 일단 지금은 쉼표 표함해서 받음. 추후 리스트화하는 거 고민
 
     private String translator;
 
+    @NotNull
     @Positive
     private Long price;
 
-    @NotBlank
+    @NotNull
+    @URL
     private String thumbnail;
 
+    @NotNull
     @Positive
     private Long page;
 }
