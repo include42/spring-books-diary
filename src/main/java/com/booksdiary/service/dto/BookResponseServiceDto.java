@@ -1,15 +1,11 @@
 package com.booksdiary.service.dto;
 
 import com.booksdiary.domain.Book;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Builder
-@AllArgsConstructor
 public class BookResponseServiceDto {
     private final Long id;
     private final LocalDateTime createAt;
