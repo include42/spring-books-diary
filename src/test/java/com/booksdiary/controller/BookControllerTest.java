@@ -43,12 +43,12 @@ public class BookControllerTest {
 
     @DisplayName("'/books'로 GET 요청 시, 도서의 목록을 반환한다.")
     @Test
-    void listTest() throws Exception {
+    void getBooksTest() throws Exception {
         List<BookResponseServiceDto> bookResponses = BookGenerator.createBooks()
                 .stream()
                 .map(BookResponseServiceDto::new)
                 .collect(Collectors.toList());
-        when(bookService.list()).thenReturn(bookResponses);
+        when(bookService.getBooks()).thenReturn(bookResponses);
 
         this.mockMvc.perform(get(API + "/books")
                 .accept(MediaType.APPLICATION_JSON_VALUE))
@@ -57,5 +57,17 @@ public class BookControllerTest {
                 .andExpect(jsonPath("$[1].id").value(도서_ID_2))
                 .andExpect(jsonPath("$[0].name").value(도서_이름_1))
                 .andExpect(jsonPath("$[1].name").value(도서_이름_2));
+    }
+
+    @DisplayName("'/books/{id}'로 GET 요청 시, 해당 도서를 반환한다.")
+    @Test
+    void readBookTest() throws Exception {
+        BookResponseServiceDto bookResponse = new BookResponseServiceDto(BookGenerator.createBook());
+        when(bookService.getBook(도서_ID_1)).thenReturn(bookResponse);
+
+        this.mockMvc.perform(get(API + "/books/" + 도서_ID_1)
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$.id").value(도서_ID_1))
+                .andExpect(jsonPath("$.name").value(도서_이름_1));
     }
 }

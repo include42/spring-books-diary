@@ -36,7 +36,7 @@ public class BookServiceTest {
         List<Book> books = BookGenerator.createBooks();
         when(bookRepository.findAll()).thenReturn(books);
 
-        List<BookResponseServiceDto> foundBooks = bookService.list();
+        List<BookResponseServiceDto> foundBooks = bookService.getBooks();
 
         assertThat(foundBooks)
                 .hasSize(2)
