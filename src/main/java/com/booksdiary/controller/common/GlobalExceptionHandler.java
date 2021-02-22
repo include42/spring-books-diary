@@ -15,7 +15,12 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import java.nio.file.AccessDeniedException;
 
-// TODO: 2021/02/22 문서화 주석 마무리해두기
+/**
+ * GlobalExceptionHandler는 다양한 예외에 대한 핸들링 작업을 수행한다.
+ * Exception을 상속받은 모든 클래스에 대해 대응하며, ErrorResponse를 ResponseEntity에 담아 반환한다.
+ * <p>
+ * ref https://cheese10yun.github.io/spring-guide-exception/
+ */
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -32,7 +37,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * @ModelAttribut 으로 binding error 발생시 BindException 발생한다.
+     * ModelAttribute 으로 binding error 발생시 BindException 발생한다.
      * ref https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-ann-modelattrib-method-args
      */
     @ExceptionHandler(BindException.class)
@@ -54,7 +59,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 지원하지 않은 HTTP method 호출 할 경우 발생
+     * 지원하지 않은 HTTP method를 호출 할 경우 발생
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     protected ResponseEntity<ErrorResponse> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
