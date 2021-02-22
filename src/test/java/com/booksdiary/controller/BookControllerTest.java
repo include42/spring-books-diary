@@ -1,5 +1,7 @@
 package com.booksdiary.controller;
 
+import com.booksdiary.controller.common.ErrorCode;
+import com.booksdiary.exception.BookNotFoundException;
 import com.booksdiary.service.BookService;
 import com.booksdiary.service.dto.BookResponseServiceDto;
 import com.booksdiary.utils.BookGenerator;
@@ -22,6 +24,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 // TODO: 2021/02/17 Generic을 이용한 Post, Delete 테스트 하기
 @WebMvcTest
@@ -52,6 +55,7 @@ public class BookControllerTest {
 
         this.mockMvc.perform(get(API + "/books")
                 .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].id").value(도서_ID_1))
                 .andExpect(jsonPath("$[1].id").value(도서_ID_2))
@@ -67,7 +71,23 @@ public class BookControllerTest {
 
         this.mockMvc.perform(get(API + "/books/" + 도서_ID_1)
                 .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(도서_ID_1))
                 .andExpect(jsonPath("$.name").value(도서_이름_1));
+    }
+
+    @DisplayName("예외 테스트 : '/books/{id}'로 GET 요청 시, 해당 도서가 없다면 예외를 발생시킨다.")
+    @Test
+    public void readBookNotFoundException() throws Exception {
+        when(bookService.getBook(도서_ID_1)).thenThrow(new BookNotFoundException(도서_ID_1));
+
+        //then
+        this.mockMvc.perform(get(API + "/books/" + 도서_ID_1)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("message").value(ErrorCode.ENTITY_NOT_FOUND.getMessage()))
+                .andExpect(jsonPath("status").value(ErrorCode.ENTITY_NOT_FOUND.getStatus()))
+                .andExpect(jsonPath("code").value(ErrorCode.ENTITY_NOT_FOUND.getCode()))
+                .andExpect(jsonPath("errors").isEmpty());
     }
 }
