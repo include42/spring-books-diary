@@ -7,7 +7,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Slf4j(topic = "DEFAULT_FILE_APPENDER")
+@Slf4j(topic = "DEFAULT_FILE_LOGGER")
 @Component
 public class LogInterceptor implements HandlerInterceptor {
     @Override
