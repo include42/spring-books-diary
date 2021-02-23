@@ -21,7 +21,7 @@ import java.nio.file.AccessDeniedException;
  * <p>
  * ref https://cheese10yun.github.io/spring-guide-exception/
  */
-@Slf4j(topic = "ERROR_FILE_LOGGER")
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     /**
