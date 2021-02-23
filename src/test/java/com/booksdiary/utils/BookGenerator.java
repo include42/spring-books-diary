@@ -1,6 +1,6 @@
 package com.booksdiary.utils;
 
-import com.booksdiary.domain.Book;
+import com.booksdiary.domain.book.domain.Book;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
