@@ -2,14 +2,14 @@ package com.booksdiary.controller.common;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.AsyncHandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Slf4j(topic = "DEFAULT_FILE_LOGGER")
 @Component
-public class LogInterceptor implements HandlerInterceptor {
+public class LogInterceptor implements AsyncHandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         log.info("url : {}", request.getRequestURL());
