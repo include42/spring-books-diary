@@ -25,6 +25,9 @@ import java.nio.file.AccessDeniedException;
 @Slf4j(topic = "ERROR_FILE_LOGGER")
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    // TODO: 2021/03/05 문서화 주석 마저 달기
+    // TODO: 2021/03/05 예외 클래스 정보와 에러 메시지를 얼마정도 전달해줘야 할까? 고민해보기
+
     /**
      * javax.validation.Valid or @Validated 으로 binding error 발생시 발생한다.
      * HttpMessageConverter 에서 등록한 HttpMessageConverter binding 못할경우 발생
