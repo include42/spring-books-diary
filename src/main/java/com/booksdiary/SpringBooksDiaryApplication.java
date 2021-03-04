@@ -1,11 +1,17 @@
 package com.booksdiary;
 
+import com.booksdiary.global.common.RestProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootApplication
+@EnableConfigurationProperties(RestProperties.class)
 public class SpringBooksDiaryApplication {
-    // TODO: 2020/12/23 패키지명 명확히 정리하기, 또한 왜 저렇게 했는지 이유 정립하기(패키지명의 이유)
+    static {
+        System.setProperty("spring.config.location", "classpath:/application.yml,classpath:/application-rest.yml");
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(SpringBooksDiaryApplication.class, args);
     }
