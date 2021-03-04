@@ -26,8 +26,8 @@ public class BookClient {
 
     public BookClient(WebClient.Builder webClientBuilder, final RestProperties restProperties) {
         this.webClient = webClientBuilder
-                .baseUrl("https://dapi.kakao.com")
-                .defaultHeader("Authorization", restProperties.getAuthorization())
+                .baseUrl(restProperties.getKakaoUrl())
+                .defaultHeader("Authorization", restProperties.getKakaoAuthorization())
                 .filter(logRequest())
                 .filter(logResponse())
                 .build();
@@ -62,23 +62,7 @@ public class BookClient {
     }
 
     public BookCreateRequestServiceDto getBookDocuments(final String isbn) {
-        Mono<KakaoBookDto> kakaoBookMonos = this.webClient
-                .get()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/v3/search/book")
-                        .queryParam("sort", "accuracy")
-                        .queryParam("page", "1")
-                        .queryParam("size", "10")
-                        .queryParam("target", "isbn")
-                        .queryParam("query", "0000000000001")
-                        .build())
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .onStatus(HttpStatus::is4xxClientError, clientResponse -> Mono.just(new HttpClientErrorException(clientResponse.statusCode())))
-                .onStatus(HttpStatus::is5xxServerError, clientResponse -> Mono.just(new HttpClientErrorException(clientResponse.statusCode())))
-                .bodyToMono(KakaoBookDto.class);
-
-        KakaoBookDto kakaoBookDto = kakaoBookMonos.blockOptional()
+        KakaoBookDto kakaoBookDto = getKakaoBookMonos(isbn).blockOptional()
                 .orElseThrow(() -> new ISBNNotFoundException(isbn));
 
         validateKakaoBookDto(kakaoBookDto, isbn);
@@ -96,6 +80,24 @@ public class BookClient {
                 .price(kakaoBook.getPrice())
                 .thumbnail(kakaoBook.getThumbnail())
                 .build();
+    }
+
+    private Mono<KakaoBookDto> getKakaoBookMonos(String isbn) {
+        return this.webClient
+                .get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/v3/search/book")
+                        .queryParam("sort", "accuracy")
+                        .queryParam("page", "1")
+                        .queryParam("size", "10")
+                        .queryParam("target", "isbn")
+                        .queryParam("query", isbn)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .onStatus(HttpStatus::is4xxClientError, clientResponse -> Mono.just(new HttpClientErrorException(clientResponse.statusCode())))
+                .onStatus(HttpStatus::is5xxServerError, clientResponse -> Mono.just(new HttpClientErrorException(clientResponse.statusCode())))
+                .bodyToMono(KakaoBookDto.class);
     }
 
     private void validateKakaoBookDto(KakaoBookDto kakaoBookDto, String isbn) {
