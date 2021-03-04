@@ -1,4 +1,4 @@
-package com.booksdiary.domain.book.service.dto.kakao;
+package com.booksdiary.domain.book.dto.kakao;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

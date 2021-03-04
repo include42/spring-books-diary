@@ -1,4 +1,4 @@
-package com.booksdiary.domain.book.service.dto.kakao;
+package com.booksdiary.domain.book.dto.kakao;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -21,8 +21,8 @@ public class KakaoBookDocumentDto {
     private List<String> authors;
     private String publisher;
     private List<String> translator;
-    private Integer price;
-    private Integer salePrice;
+    private Long price;
+    private Long salePrice;
     private String thumbnail;
     private String status;
 }

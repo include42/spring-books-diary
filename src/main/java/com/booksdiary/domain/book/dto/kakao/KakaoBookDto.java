@@ -1,4 +1,4 @@
-package com.booksdiary.domain.book.service.dto.kakao;
+package com.booksdiary.domain.book.dto.kakao;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class KakaoBookResponseDto {
+public class KakaoBookDto {
     private List<KakaoBookDocumentDto> documents;
     private KakaoBookMetadataDto meta;
 }
