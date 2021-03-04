@@ -12,6 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.reactive.function.client.WebClientRequestException;
 
 import java.nio.file.AccessDeniedException;
 
@@ -102,6 +103,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.valueOf(errorCode.getStatus()));
     }
 
+    @ExceptionHandler(WebClientRequestException.class)
+    protected ResponseEntity<ErrorResponse> handleWebClientRequestException(WebClientRequestException e) {
+        log.error("handleWebClientRequestException", e);
+        final ErrorResponse response = ErrorResponse.of(ErrorCode.WEBCLIENT_REQUEST_ERROR);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ErrorResponse> handleException(Exception e) {

@@ -49,7 +49,6 @@ public class ErrorResponse {
         return new ErrorResponse(ErrorCode.INVALID_TYPE_VALUE, errors);
     }
 
-
     @Getter
     public static class FieldError {
         private final String field;
