@@ -70,11 +70,11 @@ public class BookClient {
 
         return BookCreateRequestServiceDto.builder()
                 .title(kakaoBook.getTitle())
-                .contents(kakaoBook.getContents())
+                .content(kakaoBook.getContents())
                 .url(kakaoBook.getUrl())
                 .isbn(isbn)
-                .datetime(kakaoBook.getDatetime().toLocalDateTime())
-                .authors(combineAuthors(kakaoBook.getAuthors()))
+                .publishDate(kakaoBook.getDatetime().toLocalDateTime())
+                .author(combineAuthors(kakaoBook.getAuthors()))
                 .publisher(kakaoBook.getPublisher())
                 .translator(combineTranslators(kakaoBook.getTranslator()))
                 .price(kakaoBook.getPrice())
@@ -117,6 +117,9 @@ public class BookClient {
     }
 
     private String combineAuthors(List<String> authors) {
+        if (Objects.isNull(authors) || authors.isEmpty()) {
+            return Strings.EMPTY;
+        }
         return String.join(",", authors);
     }
 

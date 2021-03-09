@@ -1,9 +1,10 @@
 package com.booksdiary.domain.book.service;
 
 import com.booksdiary.domain.book.domain.Book;
+import com.booksdiary.domain.book.dto.BookCreateRequestServiceDto;
+import com.booksdiary.domain.book.dto.BookResponseServiceDto;
 import com.booksdiary.domain.book.exception.BookNotFoundException;
 import com.booksdiary.domain.book.repository.BookRepository;
-import com.booksdiary.domain.book.service.dto.BookResponseServiceDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,4 +32,25 @@ public class BookService {
 
         return new BookResponseServiceDto(book);
     }
+
+    @Transactional
+    public BookResponseServiceDto createBook(BookCreateRequestServiceDto request) {
+        final Book book = Book.builder()
+                .isbn(request.getIsbn())
+                .title(request.getTitle())
+                .content(request.getContent())
+                .publishDate(request.getPublishDate())
+                .publisher(request.getPublisher())
+                .author(request.getAuthor())
+                .translator(request.getTranslator())
+                .price(request.getPrice())
+                .thumbnail(request.getThumbnail())
+                .build();
+
+        final Book savedBook = bookRepository.save(book);
+
+        return new BookResponseServiceDto(savedBook);
+    }
+
+
 }

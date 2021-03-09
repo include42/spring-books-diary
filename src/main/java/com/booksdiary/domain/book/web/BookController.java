@@ -1,13 +1,16 @@
 package com.booksdiary.domain.book.web;
 
+import com.booksdiary.domain.book.dto.BookCreateRequestDto;
+import com.booksdiary.domain.book.dto.BookCreateRequestServiceDto;
+import com.booksdiary.domain.book.dto.BookResponseDto;
+import com.booksdiary.domain.book.service.BookClient;
 import com.booksdiary.domain.book.service.BookService;
-import com.booksdiary.domain.book.web.dto.BookResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 public class BookController {
     private final BookService bookService;
+    private final BookClient bookClient;
 
     @GetMapping("/api/books")
     public ResponseEntity<List<BookResponseDto>> getBooks() {
@@ -32,6 +36,16 @@ public class BookController {
         final BookResponseDto response = new BookResponseDto(bookService.getBook(bookId));
 
         return ResponseEntity.ok()
+                .body(response);
+    }
+
+    @PostMapping("/api/books")
+    public ResponseEntity<BookResponseDto> createBook(@RequestBody @Valid final BookCreateRequestDto request) {
+        final BookCreateRequestServiceDto bookCreateRequest = bookClient.getBookDocuments(request.getIsbn());
+        final BookResponseDto response = new BookResponseDto(bookService.createBook(bookCreateRequest));
+        final URI uri = URI.create("/api/books/" + response.getId());
+
+        return ResponseEntity.created(uri)
                 .body(response);
     }
 }

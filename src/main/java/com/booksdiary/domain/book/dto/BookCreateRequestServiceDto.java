@@ -11,11 +11,11 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class BookCreateRequestServiceDto {
     private final String title;
-    private final String contents;
+    private final String content;
     private final String url;
     private final String isbn;
-    private final LocalDateTime datetime;
-    private final String authors;
+    private final LocalDateTime publishDate;
+    private final String author;
     private final String publisher;
     private final String translator;
     private final Long price;
