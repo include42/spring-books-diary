@@ -6,6 +6,18 @@
 
     <appender name="DEFAULT_FILE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${home}/default-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>15mb</maxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf8</charset>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="HTTP_FILE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${home}/access-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxFileSize>15mb</maxFileSize>
             <maxHistory>30</maxHistory>
@@ -30,6 +42,10 @@
 
     <logger name="ERROR_FILE_LOGGER" level="ERROR" additivity="true">
         <appender-ref ref="ERROR_FILE_APPENDER"/>
+    </logger>
+
+    <logger name="HTTP_FILE_LOGGER" level="DEBUG" additivity="true">
+        <appender-ref ref="HTTP_FILE_APPENDER"/>
     </logger>
 
     <logger name="DEFAULT_FILE_LOGGER" level="DEBUG" additivity="true">

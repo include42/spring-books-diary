@@ -31,21 +31,19 @@ public class Book {
     private String isbn;
 
     @NotBlank
-    private String name;
+    private String title;
 
     @NotBlank
     private String content;
 
     @NotNull
     private LocalDateTime publishDate;
-    // TODO: 2021/02/19 실제 API의 양식 확인, 별도의 검증 필요한지 확인(현재날짜보다 뒤여야하나?)
 
     @NotBlank
     private String publisher;
 
     @NotBlank
     private String author;
-    // TODO: 2021/02/17 저자가 여러 명일때, 일단 지금은 쉼표 표함해서 받음. 추후 리스트화하는 거 고민
 
     private String translator;
 
@@ -56,8 +54,4 @@ public class Book {
     @NotNull
     @URL
     private String thumbnail;
-
-    @NotNull
-    @Positive
-    private Long page;
 }

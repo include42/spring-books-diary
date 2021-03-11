@@ -1,6 +1,5 @@
-package com.booksdiary.domain.book.web.dto;
+package com.booksdiary.domain.book.dto;
 
-import com.booksdiary.domain.book.service.dto.BookResponseServiceDto;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -10,7 +9,7 @@ public class BookResponseDto {
     private final Long id;
     private final LocalDateTime createAt;
     private final String isbn;
-    private final String name;
+    private final String title;
     private final String content;
     private final LocalDateTime publishDate;
     private final String publisher;
@@ -18,13 +17,12 @@ public class BookResponseDto {
     private final String translator;
     private final Long price;
     private final String thumbnail;
-    private final Long page;
 
     public BookResponseDto(BookResponseServiceDto serviceDto) {
         this.id = serviceDto.getId();
         this.createAt = serviceDto.getCreateAt();
         this.isbn = serviceDto.getIsbn();
-        this.name = serviceDto.getName();
+        this.title = serviceDto.getTitle();
         this.content = serviceDto.getContent();
         this.publishDate = serviceDto.getPublishDate();
         this.publisher = serviceDto.getPublisher();
@@ -32,6 +30,5 @@ public class BookResponseDto {
         this.translator = serviceDto.getTranslator();
         this.price = serviceDto.getPrice();
         this.thumbnail = serviceDto.getThumbnail();
-        this.page = serviceDto.getPage();
     }
 }
