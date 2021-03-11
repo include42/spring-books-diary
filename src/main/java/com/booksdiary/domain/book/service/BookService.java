@@ -51,6 +51,4 @@ public class BookService {
 
         return new BookResponseServiceDto(savedBook);
     }
-
-
 }

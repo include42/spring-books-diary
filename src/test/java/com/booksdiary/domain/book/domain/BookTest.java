@@ -48,7 +48,7 @@ public class BookTest {
                 .id(도서_ID_1)
                 .createdAt(도서_생성일)
                 .isbn(도서_잘못된_ISBN)
-                .name(도서_이름_1)
+                .title(도서_제목_1)
                 .content(도서_내용)
                 .publishDate(도서_출간일)
                 .publisher(도서_출판사)
@@ -56,7 +56,6 @@ public class BookTest {
                 .translator(도서_번역가)
                 .price(도서_가격)
                 .thumbnail(도서_썸네일)
-                .page(도서_페이지)
                 .build();
 
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
@@ -76,7 +75,7 @@ public class BookTest {
                 .id(도서_ID_1)
                 .createdAt(도서_생성일)
                 .isbn(invalidISBN)
-                .name(도서_이름_1)
+                .title(도서_제목_1)
                 .content(도서_내용)
                 .publishDate(도서_출간일)
                 .publisher(도서_출판사)
@@ -84,7 +83,6 @@ public class BookTest {
                 .translator(도서_번역가)
                 .price(도서_가격)
                 .thumbnail(도서_썸네일)
-                .page(도서_페이지)
                 .build();
 
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
@@ -104,7 +102,7 @@ public class BookTest {
                 .id(도서_ID_1)
                 .createdAt(도서_생성일)
                 .isbn(도서_ISBN)
-                .name(invalidName)
+                .title(invalidName)
                 .content(도서_내용)
                 .publishDate(도서_출간일)
                 .publisher(도서_출판사)
@@ -112,7 +110,6 @@ public class BookTest {
                 .translator(도서_번역가)
                 .price(도서_가격)
                 .thumbnail(도서_썸네일)
-                .page(도서_페이지)
                 .build();
 
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
@@ -132,7 +129,7 @@ public class BookTest {
                 .id(도서_ID_1)
                 .createdAt(도서_생성일)
                 .isbn(도서_ISBN)
-                .name(도서_이름_1)
+                .title(도서_제목_1)
                 .content(invalidContent)
                 .publishDate(도서_출간일)
                 .publisher(도서_출판사)
@@ -140,7 +137,6 @@ public class BookTest {
                 .translator(도서_번역가)
                 .price(도서_가격)
                 .thumbnail(도서_썸네일)
-                .page(도서_페이지)
                 .build();
 
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
@@ -160,7 +156,7 @@ public class BookTest {
                 .id(도서_ID_1)
                 .createdAt(도서_생성일)
                 .isbn(도서_ISBN)
-                .name(도서_이름_1)
+                .title(도서_제목_1)
                 .content(도서_내용)
                 .publishDate(invalidDate)
                 .publisher(도서_출판사)
@@ -168,7 +164,6 @@ public class BookTest {
                 .translator(도서_번역가)
                 .price(도서_가격)
                 .thumbnail(도서_썸네일)
-                .page(도서_페이지)
                 .build();
 
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
@@ -188,7 +183,7 @@ public class BookTest {
                 .id(도서_ID_1)
                 .createdAt(도서_생성일)
                 .isbn(도서_ISBN)
-                .name(도서_이름_1)
+                .title(도서_제목_1)
                 .content(도서_내용)
                 .publishDate(도서_출간일)
                 .publisher(invalidPublisher)
@@ -196,7 +191,6 @@ public class BookTest {
                 .translator(도서_번역가)
                 .price(도서_가격)
                 .thumbnail(도서_썸네일)
-                .page(도서_페이지)
                 .build();
 
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
@@ -216,7 +210,7 @@ public class BookTest {
                 .id(도서_ID_1)
                 .createdAt(도서_생성일)
                 .isbn(도서_ISBN)
-                .name(도서_이름_1)
+                .title(도서_제목_1)
                 .content(도서_내용)
                 .publishDate(도서_출간일)
                 .publisher(도서_출판사)
@@ -224,7 +218,6 @@ public class BookTest {
                 .translator(도서_번역가)
                 .price(도서_가격)
                 .thumbnail(도서_썸네일)
-                .page(도서_페이지)
                 .build();
 
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
@@ -244,7 +237,7 @@ public class BookTest {
                 .id(도서_ID_1)
                 .createdAt(도서_생성일)
                 .isbn(도서_ISBN)
-                .name(도서_이름_1)
+                .title(도서_제목_1)
                 .content(도서_내용)
                 .publishDate(도서_출간일)
                 .publisher(도서_출판사)
@@ -252,7 +245,6 @@ public class BookTest {
                 .translator(도서_번역가)
                 .price(invalidPrice)
                 .thumbnail(도서_썸네일)
-                .page(도서_페이지)
                 .build();
 
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
@@ -272,7 +264,7 @@ public class BookTest {
                 .id(도서_ID_1)
                 .createdAt(도서_생성일)
                 .isbn(도서_ISBN)
-                .name(도서_이름_1)
+                .title(도서_제목_1)
                 .content(도서_내용)
                 .publishDate(도서_출간일)
                 .publisher(도서_출판사)
@@ -280,7 +272,6 @@ public class BookTest {
                 .translator(도서_번역가)
                 .price(invalidPrice)
                 .thumbnail(도서_썸네일)
-                .page(도서_페이지)
                 .build();
 
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
@@ -300,7 +291,7 @@ public class BookTest {
                 .id(도서_ID_1)
                 .createdAt(도서_생성일)
                 .isbn(도서_ISBN)
-                .name(도서_이름_1)
+                .title(도서_제목_1)
                 .content(도서_내용)
                 .publishDate(도서_출간일)
                 .publisher(도서_출판사)
@@ -308,7 +299,6 @@ public class BookTest {
                 .translator(도서_번역가)
                 .price(도서_가격)
                 .thumbnail(invalidThumbnail)
-                .page(도서_페이지)
                 .build();
 
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
@@ -327,7 +317,7 @@ public class BookTest {
                 .id(도서_ID_1)
                 .createdAt(도서_생성일)
                 .isbn(도서_ISBN)
-                .name(도서_이름_1)
+                .title(도서_제목_1)
                 .content(도서_내용)
                 .publishDate(도서_출간일)
                 .publisher(도서_출판사)
@@ -335,7 +325,6 @@ public class BookTest {
                 .translator(도서_번역가)
                 .price(도서_가격)
                 .thumbnail(도서_잘못된_썸네일)
-                .page(도서_페이지)
                 .build();
 
         Set<ConstraintViolation<Book>> violations = validator.validate(book);
@@ -345,61 +334,5 @@ public class BookTest {
         }
         assertThat(violations.isEmpty()).isFalse();
         assertThat(violations.toString()).contains("올바른 URL이어야 합니다");
-    }
-
-    @DisplayName("예외 테스트 : null인 도서 페이지 정보가 들어오면 예외가 발생한다.")
-    @NullSource
-    @ParameterizedTest
-    void nullPageTest(Long invalidPage) {
-        Book book = Book.builder()
-                .id(도서_ID_1)
-                .createdAt(도서_생성일)
-                .isbn(도서_ISBN)
-                .name(도서_이름_1)
-                .content(도서_내용)
-                .publishDate(도서_출간일)
-                .publisher(도서_출판사)
-                .author(도서_작가)
-                .translator(도서_번역가)
-                .price(도서_가격)
-                .thumbnail(도서_썸네일)
-                .page(invalidPage)
-                .build();
-
-        Set<ConstraintViolation<Book>> violations = validator.validate(book);
-
-        for (ConstraintViolation<Book> violation : violations) {
-            logger.info(violation::getMessage);
-        }
-        assertThat(violations.isEmpty()).isFalse();
-        assertThat(violations.toString()).contains("널이어서는 안됩니다");
-    }
-
-    @DisplayName("예외 테스트 : 0보다 작거나 같은 페이지 정보가 들어오면 예외가 발생한다.")
-    @ValueSource(longs = {-100, 0})
-    @ParameterizedTest
-    void notPositivePageTest(Long invalidPage) {
-        Book book = Book.builder()
-                .id(도서_ID_1)
-                .createdAt(도서_생성일)
-                .isbn(도서_ISBN)
-                .name(도서_이름_1)
-                .content(도서_내용)
-                .publishDate(도서_출간일)
-                .publisher(도서_출판사)
-                .author(도서_작가)
-                .translator(도서_번역가)
-                .price(도서_가격)
-                .thumbnail(도서_썸네일)
-                .page(invalidPage)
-                .build();
-
-        Set<ConstraintViolation<Book>> violations = validator.validate(book);
-
-        for (ConstraintViolation<Book> violation : violations) {
-            logger.info(violation::getMessage);
-        }
-        assertThat(violations.isEmpty()).isFalse();
-        assertThat(violations.toString()).contains("0보다 커야 합니다");
     }
 }
